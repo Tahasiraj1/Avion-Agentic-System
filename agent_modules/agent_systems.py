@@ -1,15 +1,10 @@
-from agents import (
-    Agent, 
-    OpenAIChatCompletionsModel, 
-    AsyncOpenAI, 
-    set_tracing_disabled, 
-)
-from dotenv import load_dotenv
-from tools.fetch_orders import fetch_orders
-from tools.fetch_products import get_products
-from tools.cancel_order import cancel_order
+from .instructions import CUSTOMER_AGENT_INSTRUCTIONS, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INSTRUCTIONS
+from agents import Agent, OpenAIChatCompletionsModel, AsyncOpenAI, set_tracing_disabled
 from tools.update_customer_details import update_customer_details
-from agent_modules.instructions import CUSTOMER_AGENT_INSTRUCTIONS, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INSTRUCTIONS
+from tools.fetch_products import get_products
+from tools.fetch_orders import fetch_orders
+from tools.cancel_order import cancel_order
+from dotenv import load_dotenv
 import os
 
 load_dotenv()
