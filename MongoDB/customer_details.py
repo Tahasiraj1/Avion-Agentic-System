@@ -36,10 +36,3 @@ class CustomerDetails(DB):
             return f"{result.modified_count} customer details updated successfully."
         except Exception as e:
             return f"Error updating customer details: {str(e)}"
-
-
-
-if __name__ == "__main__":
-    customer_details = CustomerDetails()
-    update = customer_details.update_customer_details('user_2s4YFq8ILmoNfr6UeyeYGO0JCjA', UpdateCustomerDetails(country='UK'))
-    print(update)
