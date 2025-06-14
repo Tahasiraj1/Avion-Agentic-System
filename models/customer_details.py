@@ -1,11 +1,12 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class UpdateCustomerDetails(BaseModel):
-    firstName: str | None = None
-    lastName: str | None = None
-    email: str | None = None
-    phoneNumber: str | None = None
-    houseNo: str | None = None
-    city: str | None = None
-    postalCode: str | None = None
-    country: str | None = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    email: Optional[str] = None
+    phoneNumber: Optional[str] = None
+    houseNo: Optional[str] = None
+    city: Optional[str] = None
+    postalCode: Optional[str] = None
+    country: Optional[str] = None
