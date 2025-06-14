@@ -47,7 +47,7 @@ product_agent = Agent(
 )
 
 triage_agent = Agent(
-    name="Customer Support Agent",
+    name="Orchestrator Agent",
     instructions=TRIAGE_AGENT,
     model=model,
     handoffs=[customer_agent, order_agent, product_agent],

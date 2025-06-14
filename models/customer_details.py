@@ -1,13 +1,11 @@
-from dataclasses import dataclass
-from typing import Optional, TypedDict
+from pydantic import BaseModel
 
-@dataclass
-class UpdateCustomerDetails(TypedDict):
-    firstName: Optional[str]
-    lastName: Optional[str]
-    email: Optional[str]
-    phoneNumber: Optional[str]
-    houseNo: Optional[str]
-    city: Optional[str]
-    postalCode: Optional[str]
-    country: Optional[str]
+class UpdateCustomerDetails(BaseModel):
+    firstName: str | None = None
+    lastName: str | None = None
+    email: str | None = None
+    phoneNumber: str | None = None
+    houseNo: str | None = None
+    city: str | None = None
+    postalCode: str | None = None
+    country: str | None = None

@@ -15,7 +15,7 @@ async def update_customer_details(
 
     Args:
         wrapper (RunContextWrapper[UserContext]): Context containing userId and timestamp.
-        customer_details (UpdateCustomerDetails): The customer details to update.
+        customer_details (UpdateCustomerDetails): Fields to update in customer details, some of which may remain same.
         user_query (str): The user's query, from which the customer details fields to update will be extracted.
 
     Returns:
