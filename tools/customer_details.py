@@ -9,7 +9,14 @@ class UserContext:
 
 @function_tool
 async def fetch_customer_details(wrapper: RunContextWrapper[UserContext]) -> str:
-    """Fetches customer details from MongoDB using user_id."""
+    """Fetches customer details from MongoDB using user_id.
+    
+    Args:
+        wrapper (RunContextWrapper[UserContext]): Context containing userId and timestamp.
+
+    Returns:
+        str: A message indicating the customer details.
+    """
     try:
         get_customer_details = CustomerDetails()
         customer_details = get_customer_details.get_customer_details(wrapper.context.userId)

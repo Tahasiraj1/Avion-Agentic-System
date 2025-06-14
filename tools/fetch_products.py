@@ -12,6 +12,11 @@ SANITY_PROJECT_ID = os.getenv("SANITY_PROJECT_ID")
 
 @function_tool
 async def get_products():
+    """Fetches products from Sanity.io.
+    
+    Returns:
+        list: A list of products.
+    """
     query = '*[_type == "product"]'
 
     url = f"https://{SANITY_PROJECT_ID}.api.sanity.io/v{SANITY_API_VERSION}/data/query/{SANITY_DATASET}"

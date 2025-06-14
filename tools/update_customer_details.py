@@ -1,5 +1,4 @@
 from agents import function_tool, RunContextWrapper
-from dataclasses import dataclass
 from MongoDB.customer_details import CustomerDetails
 from models.customer_details import UpdateCustomerDetails
 from models.user_context import UserContext

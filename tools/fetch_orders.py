@@ -1,11 +1,18 @@
 from agents import function_tool, RunContextWrapper
-from dataclasses import dataclass
 from MongoDB.orders import Order
 from models.user_context import UserContext
+from typing import List
 
 @function_tool
-async def fetch_orders(wrapper: RunContextWrapper[UserContext]) -> str:
-    """Fetches customer orders from MongoDB using user_id."""
+async def fetch_orders(wrapper: RunContextWrapper[UserContext]) -> List[str]:
+    """Fetches customer orders from MongoDB using user_id.
+    
+    Args:
+        wrapper (RunContextWrapper[UserContext]): Context containing userId and timestamp.
+
+    Returns:
+        list: A list of orders.
+    """
     try:
         orders_list = []
 
@@ -17,6 +24,6 @@ async def fetch_orders(wrapper: RunContextWrapper[UserContext]) -> str:
         
         if not orders_list:
             return "No orders found."
-        return f"Orders: {orders_list}\n"
+        return orders_list
     except Exception as e:
         return f"Error fetching orders.: {e}"

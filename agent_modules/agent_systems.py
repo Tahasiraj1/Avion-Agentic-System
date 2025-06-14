@@ -1,4 +1,4 @@
-from .instructions import CUSTOMER_AGENT_INSTRUCTIONS, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INSTRUCTIONS
+from .instructions import CUSTOMER_AGENT_INSTRUCTIONS, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INSTRUCTIONS, PRODUCT_AGENT_INSTRUCTIONS
 from agents import Agent, OpenAIChatCompletionsModel, AsyncOpenAI, set_tracing_disabled
 from tools.update_customer_details import update_customer_details
 from tools.fetch_products import get_products
@@ -39,10 +39,16 @@ order_agent = Agent(
     tools=[fetch_orders, cancel_order],
 )
 
+product_agent = Agent(
+    name="Product Service Agent",
+    instructions=PRODUCT_AGENT_INSTRUCTIONS,
+    model=model,
+    tools=[get_products],
+)
+
 agent = Agent(
     name="Customer Support Agent",
     instructions=CUSTOMER_SUPPORT_AGENT,
     model=model,
-    tools=[fetch_orders, get_products, cancel_order],
-    handoffs=[customer_agent]
+    handoffs=[customer_agent, order_agent, product_agent]
 )

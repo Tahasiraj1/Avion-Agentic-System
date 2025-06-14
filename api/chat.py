@@ -49,5 +49,5 @@ async def chat(query: ChatRequest):
     if not latest_user_message:
         return {"error": "No user message found."}
     
-    result = await Runner.run(agent, latest_user_message, context=context)
+    result = await Runner.run(starting_agent=agent, input=latest_user_message, context=context)
     return {"response": result.final_output}
