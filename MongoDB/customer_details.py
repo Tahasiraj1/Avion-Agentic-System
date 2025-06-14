@@ -16,10 +16,6 @@ class CustomerDetails(DB):
                 {"clerkId": id},
                 {"$set": update_fields}
             )
-            if result.matched_count == 0:
-                return f"No customer found with clerkId {id}"
-            if result.modified_count == 0:
-                return "No changes made to customer details."
-            return "Customer details updated successfully."
+            return f"{result.modified_count} customer details updated successfully.\n{result.raw_result}"
         except Exception as e:
             return f"Error updating customer details: {str(e)}"

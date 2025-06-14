@@ -1,4 +1,4 @@
-from .instructions import CUSTOMER_AGENT_INSTRUCTIONS, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INSTRUCTIONS, PRODUCT_AGENT_INSTRUCTIONS
+from .instructions import TRIAGE_AGENT, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INSTRUCTIONS, PRODUCT_AGENT_INSTRUCTIONS
 from agents import Agent, OpenAIChatCompletionsModel, AsyncOpenAI, set_tracing_disabled
 from tools.update_customer_details import update_customer_details
 from tools.fetch_products import get_products
@@ -27,7 +27,7 @@ model = OpenAIChatCompletionsModel(
 
 customer_agent = Agent(
     name="Customer Service Agent",
-    instructions=CUSTOMER_AGENT_INSTRUCTIONS,
+    instructions=CUSTOMER_SUPPORT_AGENT,
     model=model,
     tools=[update_customer_details],
 )
@@ -46,9 +46,9 @@ product_agent = Agent(
     tools=[get_products],
 )
 
-agent = Agent(
+triage_agent = Agent(
     name="Customer Support Agent",
-    instructions=CUSTOMER_SUPPORT_AGENT,
+    instructions=TRIAGE_AGENT,
     model=model,
-    handoffs=[customer_agent, order_agent, product_agent]
+    handoffs=[customer_agent, order_agent, product_agent],
 )

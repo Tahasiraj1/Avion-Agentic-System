@@ -4,7 +4,7 @@ from agents import Runner
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import Optional, List
-from agent_modules.agent_systems import agent
+from agent_modules.agent_systems import triage_agent
 
 load_dotenv()
 
@@ -49,5 +49,5 @@ async def chat(query: ChatRequest):
     if not latest_user_message:
         return {"error": "No user message found."}
     
-    result = await Runner.run(starting_agent=agent, input=latest_user_message, context=context)
+    result = await Runner.run(starting_agent=triage_agent, input=latest_user_message, context=context)
     return {"response": result.final_output}
