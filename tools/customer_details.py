@@ -24,4 +24,4 @@ async def fetch_customer_details(wrapper: RunContextWrapper[UserContext]) -> str
             return "No customer details found."
         return f"Customer Details: {customer_details[0]}"
     except Exception as e:
-        return f"Error fetching customer details.: {e}"
+        return f"Error fetching customer details: {e}"

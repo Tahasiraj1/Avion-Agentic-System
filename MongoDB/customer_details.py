@@ -1,6 +1,4 @@
 from .db import DB
-from dataclasses import asdict
-from models.customer_details import UpdateCustomerDetails
 
 class CustomerDetails(DB):
     def __init__(self):

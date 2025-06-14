@@ -1,5 +1,4 @@
 from agents import function_tool, RunContextWrapper
-from dataclasses import dataclass
 from MongoDB.orders import Order
 from MongoDB.order_item import OrderItem
 from bson import ObjectId

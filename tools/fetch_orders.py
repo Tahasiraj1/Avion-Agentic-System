@@ -26,4 +26,4 @@ async def fetch_orders(wrapper: RunContextWrapper[UserContext]) -> List[str]:
             return "No orders found."
         return orders_list
     except Exception as e:
-        return f"Error fetching orders.: {e}"
+        return f"Error fetching orders: {e}"

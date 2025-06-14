@@ -24,4 +24,4 @@ async def update_customer_details(
         result = details.update_customer_details(wrapper.context.userId, customer_details)
         return result
     except Exception as e:
-        return f"Error updating customer details.: {e}"
+        return f"Error updating customer details: {e}"
