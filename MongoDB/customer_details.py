@@ -11,7 +11,7 @@ class CustomerDetails(DB):
             {'clerkId': id},
             {'_id': False, 'clerkId': False},
         )
-        return customer_details
+        return UpdateCustomerDetails(**customer_details)
 
     def update_customer_details(self, id: str, customer_details: UpdateCustomerDetails):
         # Fetch existing data

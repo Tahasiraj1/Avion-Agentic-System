@@ -1,6 +1,7 @@
 from .instructions import TRIAGE_AGENT, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INSTRUCTIONS, PRODUCT_AGENT_INSTRUCTIONS
 from agents import Agent, OpenAIChatCompletionsModel, AsyncOpenAI, set_tracing_disabled
 from tools.update_customer_details import update_customer_details
+from tools.fetch_customer_details import fetch_customer_details
 from tools.fetch_products import get_products
 from tools.fetch_orders import fetch_orders
 from tools.cancel_order import cancel_order
@@ -22,14 +23,14 @@ provider = AsyncOpenAI(
 
 model = OpenAIChatCompletionsModel(
     openai_client=provider,
-    model='gemini-2.0-flash'
+    model='gemini-2.5-flash-preview-05-20'
 )
 
 customer_agent = Agent(
     name="Customer Service Agent",
     instructions=CUSTOMER_SUPPORT_AGENT,
     model=model,
-    tools=[update_customer_details],
+    tools=[update_customer_details, fetch_customer_details],
 )
 
 order_agent = Agent(
