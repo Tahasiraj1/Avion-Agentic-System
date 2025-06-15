@@ -2,10 +2,11 @@ from .instructions import TRIAGE_AGENT, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INST
 from tools.update_customer_details import update_customer_details
 from tools.fetch_customer_details import fetch_customer_details
 from helper.gemini_model import get_gemini_model
-from agents import Agent
 from tools.fetch_products import get_products
 from tools.fetch_orders import fetch_orders
 from tools.cancel_order import cancel_order
+from tools.update_order import update_order
+from agents import Agent
 
 model = get_gemini_model()
 
@@ -20,7 +21,7 @@ order_agent = Agent(
     name="Order Service Agent",
     instructions=ORDER_AGENT_INSTRUCTIONS,
     model=model,
-    tools=[fetch_orders, cancel_order],
+    tools=[fetch_orders, cancel_order, update_order],
 )
 
 product_agent = Agent(
