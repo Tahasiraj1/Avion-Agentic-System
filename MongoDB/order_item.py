@@ -30,9 +30,3 @@ class OrderItem(DB):
     def get_item_by_order_id(self, order_id):
         item = self.collection.find_one({'orderId': ObjectId(order_id)})
         return item
-
-if __name__ == "__main__":
-    order_item = OrderItem()
-    order = order_item.get_items('user_2s4YFq8ILmoNfr6UeyeYGO0JCjA')
-    for i, doc in enumerate(order):
-        print(f'\n{i+1}. Order Item: {doc}\n')
