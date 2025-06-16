@@ -31,32 +31,19 @@ async def update_order(params: UpdateOrder) -> str:
         if order['status'] != 'pending':
             return f"Can't update order. Order status is {order['status']}."
 
-        # Get productId from order item
+        # Get productId and quantity from order item
         product_id = order_item['productId']
+        old_quantity = order_item['quantity']
+        
+        delta_quantity = params.quantity - old_quantity
+        result = products_handler.adjust_variation_quantity(product_id, params.color, params.size, delta_quantity)
 
-        # Fetch product from Sanity
-        product_data = products_handler.get_product_by_id(product_id)
-        if not product_data:
-            return "Product not found."
-
-        variations = product_data['result'][0]['variations']
-
-        # Search matching variation
-        matching_variation = None
-        for variation in variations:
-            if variation['color'] == params.color and variation['size'] == params.size:
-                matching_variation = variation
-                break
-
-        if not matching_variation:
-            return f"No variation found for color '{params.color}' and size '{params.size}'."
-
-        if params.quantity and params.quantity > matching_variation['quantity']:
-            return f"Only {matching_variation['quantity']} items available for color '{params.color}' and size '{params.size}'."
-
-        # Perform the actual update
-        result = items_handler.update_order(params.order_id, params)
-        return result
+        if result.status_code == 200:
+            # Perform the actual update
+            items_handler.update_order(params.order_id, params)
+            return "Order quantity updated successfully."
+        
+        return "Stock updated failed — but order item not modified."
 
     except Exception as e:
         return f"Error updating order: {e}"
