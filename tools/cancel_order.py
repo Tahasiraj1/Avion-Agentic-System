@@ -4,7 +4,7 @@ from MongoDB.order_item import OrderItem
 from sanity_client import SanityClient
 
 @function_tool
-def cancel_order(order_id: str) -> str:
+async def cancel_order(order_id: str) -> str:
     """Cancels an order.
 
     Args:
@@ -27,7 +27,7 @@ def cancel_order(order_id: str) -> str:
             name = item_data['name'] if item_data else "Unknown Product"
 
             try:
-                products_handler.update_product_quantity(item_data['productId'], item_data['color'], item_data['size'], item_data['quantity'])
+                await products_handler.update_product_quantity(item_data['productId'], item_data['color'], item_data['size'], item_data['quantity'])
                 order_handler.cancel_order(order_id)
                 return f"Order '{name}' has been cancelled successfully."
             except Exception as e:

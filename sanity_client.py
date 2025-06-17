@@ -25,26 +25,26 @@ class SanityClient:
     def headers(self):
         return {'Authorization': f'Bearer {self.sanity_api_token}'}
     
-    def _post(self, url, headers, payload):
+    async def _post(self, url, headers, payload):
         response = requests.post(url, headers=headers, json=payload)
         response.raise_for_status()
         return response.json()
     
-    def _get(self, url, params, headers):
+    async def _get(self, url, params, headers):
         response = requests.get(url, params=params, headers=headers)
         response.raise_for_status()
         return response.json()
 
-    def fetch_products(self):
+    async def fetch_products(self):
         params = {'query': '*[_type == "product"]'}
-        return self._get(self.sanity_query_url, params=params, headers=self.headers)
+        return await self._get(self.sanity_query_url, params=params, headers=self.headers)
 
-    def get_product_by_id(self, product_id):
+    async def get_product_by_id(self, product_id):
         params = {'query': f'*[_type == "product" && id == "{product_id}"]'}
-        return self._get(self.sanity_query_url, params=params, headers=self.headers)
+        return await self._get(self.sanity_query_url, params=params, headers=self.headers)
     
-    def update_product_quantity(self, product_id, color, size, quantity):
-        product = self.get_product_by_id(product_id)
+    async def update_product_quantity(self, product_id, color, size, quantity):
+        product = await self.get_product_by_id(product_id)
 
         if not product['result']:
             return "Product not found."
@@ -74,15 +74,15 @@ class SanityClient:
             ]
         }
 
-        response = self._post(self.sanity_mutate_url, headers=self.headers, payload=patch_payload)
+        response = await self._post(self.sanity_mutate_url, headers=self.headers, payload=patch_payload)
         return response
     
-    def adjust_variation_quantity(self, product_id, color, size, delta_quantity):
+    async def adjust_variation_quantity(self, product_id, color, size, delta_quantity):
         """
         Adjusts the quantity of a specific variation by delta_quantity (can be positive or negative).
         """
         try:
-            product = self.get_product_by_id(product_id)
+            product = await self.get_product_by_id(product_id)
             if not product['result']:
                 return "Product not found."
 
@@ -117,7 +117,7 @@ class SanityClient:
                 ]
             }
 
-            response = self._post(self.sanity_mutate_url, headers=self.headers, payload=patch_payload)
+            response = await self._post(self.sanity_mutate_url, headers=self.headers, payload=patch_payload)
             return response
 
         except Exception as e:

@@ -19,7 +19,7 @@ async def fetch_customer_details(wrapper: RunContextWrapper[UserContext]) -> str
     """
     try:
         get_customer_details = CustomerDetails()
-        customer_details = get_customer_details.get_customer_details(wrapper.context.userId)
+        customer_details = await get_customer_details.get_customer_details(wrapper.context.userId)
         if not customer_details:
             return "No customer details found."
         return f"Customer Details: {customer_details}"

@@ -36,7 +36,7 @@ async def update_order(params: UpdateOrder) -> str:
         old_quantity = order_item['quantity']
         
         delta_quantity = params.quantity - old_quantity
-        result = products_handler.adjust_variation_quantity(product_id, params.color, params.size, delta_quantity)
+        result = await products_handler.adjust_variation_quantity(product_id, params.color, params.size, delta_quantity)
 
         if result.get('transactionId'):
             # Perform the actual update

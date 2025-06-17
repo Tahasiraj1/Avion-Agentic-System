@@ -18,7 +18,7 @@ async def fetch_orders(wrapper: RunContextWrapper[UserContext]) -> List[str]:
 
         get_orders = Order()
 
-        orders = get_orders.get_orders(wrapper.context.userId)
+        orders = await get_orders.get_orders(wrapper.context.userId)
         for ord in orders:
             orders_list.append(ord)
         

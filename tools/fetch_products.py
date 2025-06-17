@@ -9,5 +9,5 @@ async def get_products():
         list: A list of products.
     """
     sanity_client = SanityClient()
-    products = sanity_client.fetch_products()
+    products = await sanity_client.fetch_products()
     return products

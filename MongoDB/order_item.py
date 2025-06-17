@@ -7,11 +7,11 @@ class OrderItem(DB):
         super().__init__()
         self.collection = self.db['OrderItem']
 
-    def get_items(self, id):
+    async def get_items(self, id):
         items = self.collection.find({'clerkId': id})
         return items
     
-    def update_order(self, orderId, updated_order: UpdateOrder):
+    async def update_order(self, orderId, updated_order: UpdateOrder):
         update_fields = {}
 
         if updated_order.quantity is not None:
@@ -27,6 +27,6 @@ class OrderItem(DB):
         self.collection.update_one({'orderId': ObjectId(orderId)}, {'$set': update_fields})
         return f"Order updated successfully."
     
-    def get_item_by_order_id(self, order_id):
+    async def get_item_by_order_id(self, order_id):
         item = self.collection.find_one({'orderId': ObjectId(order_id)})
         return item

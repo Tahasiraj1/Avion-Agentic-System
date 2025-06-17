@@ -6,16 +6,16 @@ class CustomerDetails(DB):
         super().__init__()
         self.collection = self.db['CustomerDetails']
 
-    def get_customer_details(self, id):
+    async def get_customer_details(self, id):
         customer_details = self.collection.find_one(
             {'clerkId': id},
             {'_id': False, 'clerkId': False},
         )
         return UpdateCustomerDetails(**customer_details)
 
-    def update_customer_details(self, id: str, customer_details: UpdateCustomerDetails):
+    async def update_customer_details(self, id: str, customer_details: UpdateCustomerDetails):
         # Fetch existing data
-        existing_data = self.get_customer_details(id)
+        existing_data = await self.get_customer_details(id)
         current_details = UpdateCustomerDetails(**existing_data)
 
         # Compare & build update dict
