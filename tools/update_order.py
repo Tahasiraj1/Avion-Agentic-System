@@ -38,7 +38,7 @@ async def update_order(params: UpdateOrder) -> str:
         delta_quantity = params.quantity - old_quantity
         result = products_handler.adjust_variation_quantity(product_id, params.color, params.size, delta_quantity)
 
-        if result.status_code == 200:
+        if result.get('transactionId'):
             # Perform the actual update
             items_handler.update_order(params.order_id, params)
             return "Order quantity updated successfully."

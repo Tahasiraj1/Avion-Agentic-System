@@ -25,8 +25,8 @@ class SanityClient:
     def headers(self):
         return {'Authorization': f'Bearer {self.sanity_api_token}'}
     
-    def _post(self, url, payload):
-        response = requests.post(url, headers=self.headers, json=payload)
+    def _post(self, url, headers, payload):
+        response = requests.post(url, headers=headers, json=payload)
         response.raise_for_status()
         return response.json()
     
@@ -74,7 +74,8 @@ class SanityClient:
             ]
         }
 
-        return self._post(self.sanity_mutate_url, patch_payload)
+        response = self._post(self.sanity_mutate_url, headers=self.headers, payload=patch_payload)
+        return response
     
     def adjust_variation_quantity(self, product_id, color, size, delta_quantity):
         """
@@ -116,7 +117,8 @@ class SanityClient:
                 ]
             }
 
-            return self._post(self.sanity_mutate_url, patch_payload)
+            response = self._post(self.sanity_mutate_url, headers=self.headers, payload=patch_payload)
+            return response
 
         except Exception as e:
             return f"Error adjusting quantity: {e}"
