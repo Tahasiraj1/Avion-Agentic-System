@@ -20,11 +20,11 @@ async def update_order(params: UpdateOrder) -> str:
         products_handler = SanityClient()
         order_handler = Order()
 
-        order_item = items_handler.get_item_by_order_id(params.order_id)
+        order_item = await items_handler.get_item_by_order_id(params.order_id)
         if not order_item:
             return "No order found."
 
-        order = order_handler.get_order_by_order_id(params.order_id)
+        order = await order_handler.get_order_by_order_id(params.order_id)
         if not order:
             return "Order not found."
 
@@ -40,7 +40,7 @@ async def update_order(params: UpdateOrder) -> str:
 
         if result.get('transactionId'):
             # Perform the actual update
-            items_handler.update_order(params.order_id, params)
+            await items_handler.update_order(params.order_id, params)
             return "Order quantity updated successfully."
         
         return "Stock updated failed — but order item not modified."
