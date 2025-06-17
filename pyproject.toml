@@ -9,4 +9,5 @@ dependencies = [
     "openai-agents>=0.0.17",
     "pymongo>=4.13.1",
     "rapidfuzz>=3.13.0",
+    "stripe>=12.2.0",
 ]
