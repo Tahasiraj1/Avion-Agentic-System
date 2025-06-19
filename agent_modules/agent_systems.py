@@ -1,5 +1,5 @@
-from .instructions import TRIAGE_AGENT, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INSTRUCTIONS, PRODUCT_AGENT_INSTRUCTIONS
 from tools import update_customer_details, fetch_customer_details, get_products, fetch_orders, cancel_order, update_order
+from .instructions import TRIAGE_AGENT, CUSTOMER_SUPPORT_AGENT, ORDER_AGENT_INSTRUCTIONS, PRODUCT_AGENT_INSTRUCTIONS
 from helper import get_gemini_model
 from agents import Agent
 

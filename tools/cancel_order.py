@@ -35,7 +35,12 @@ async def cancel_order(order_id: str) -> str:
             name = item_data['name'] if item_data else "Unknown Product"
 
             try:
-                await products_handler.update_product_quantity(item_data['productId'], item_data['color'], item_data['size'], item_data['quantity'])
+                await products_handler.update_product_quantity(
+                    item_data['productId'], 
+                    item_data['color'], 
+                    item_data['size'], 
+                    item_data['quantity']
+                )
                 await order_handler.cancel_order(order_id)
 
                 if payment_intent:

@@ -44,7 +44,12 @@ async def update_order(params: UpdateOrder) -> str:
         extra_amount = int(unit_price * delta_quantity * 100)
         
         delta_quantity = params.quantity - old_quantity
-        result = await products_handler.adjust_variation_quantity(product_id, params.color, params.size, delta_quantity)
+        result = await products_handler.adjust_variation_quantity(
+            product_id, 
+            params.color, 
+            params.size, 
+            delta_quantity
+        )
 
         if result.get('transactionId'):
             if payment_intent:
