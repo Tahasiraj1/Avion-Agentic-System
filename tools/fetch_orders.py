@@ -1,6 +1,6 @@
 from agents import function_tool, RunContextWrapper
-from MongoDB.orders import Order
-from models.user_context import UserContext
+from MongoDB import Order
+from models import UserContext
 from typing import List
 
 @function_tool

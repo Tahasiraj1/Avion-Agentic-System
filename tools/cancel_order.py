@@ -1,10 +1,9 @@
-from agents import function_tool
-from MongoDB.orders import Order
-from MongoDB.order_item import OrderItem
 from sanity_client import SanityClient
+from MongoDB import Order, OrderItem
+from agents import function_tool
+from dotenv import load_dotenv
 import stripe
 import os
-from dotenv import load_dotenv
 
 load_dotenv()
 

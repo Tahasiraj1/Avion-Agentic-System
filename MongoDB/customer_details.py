@@ -1,5 +1,5 @@
 from .db import DB
-from models.customer_details import UpdateCustomerDetails
+from models import UpdateCustomerDetails
 
 class CustomerDetails(DB):
     def __init__(self):

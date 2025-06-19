@@ -1,6 +1,6 @@
 from agents import function_tool, RunContextWrapper
 from dataclasses import dataclass
-from MongoDB.customer_details import CustomerDetails
+from MongoDB import CustomerDetails
 
 @dataclass
 class UserContext:

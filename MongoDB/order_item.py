@@ -1,5 +1,5 @@
 from .db import DB
-from models.update_order import UpdateOrder
+from models import UpdateOrder
 from bson import ObjectId
 
 class OrderItem(DB):
@@ -11,7 +11,7 @@ class OrderItem(DB):
         items = self.collection.find({'clerkId': id})
         return items
     
-    async def update_order(self, orderId, updated_order: UpdateOrder):
+    async def update_order(self, updated_order: UpdateOrder):
         update_fields = {}
 
         if updated_order.quantity is not None:
@@ -24,9 +24,22 @@ class OrderItem(DB):
         if not update_fields:
             return "Nothing to update."
 
-        self.collection.update_one({'orderId': ObjectId(orderId)}, {'$set': update_fields})
-        return f"Order updated successfully."
+        self.collection.update_one(
+            {'orderId': ObjectId(updated_order.order_id)},
+            {'$set': update_fields}
+        )
     
     async def get_item_by_order_id(self, order_id):
         item = self.collection.find_one({'orderId': ObjectId(order_id)})
         return item
+    
+
+if __name__ == "__main__":
+    import asyncio
+    order_handler = OrderItem()
+    item = asyncio.run(order_handler.update_order(UpdateOrder(order_id="6851f24ff60f1ff9c0c2dd81", quantity=2, color="Red", size="S")))
+    it = asyncio.run(order_handler.get_item_by_order_id("6851f24ff60f1ff9c0c2dd81"))
+    print(item)
+    print(it)
+
+    

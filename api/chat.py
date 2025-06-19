@@ -4,7 +4,7 @@ from agents import Runner
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import Optional, List
-from agent_modules.agent_systems import triage_agent
+from agent_modules import triage_agent
 
 load_dotenv()
 

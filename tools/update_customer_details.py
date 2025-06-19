@@ -1,8 +1,6 @@
+from models import UpdateCustomerDetails, UserContext
 from agents import function_tool, RunContextWrapper
-from MongoDB.customer_details import CustomerDetails
-from models.customer_details import UpdateCustomerDetails
-from models.user_context import UserContext
-
+from MongoDB import CustomerDetails
 
 @function_tool
 async def update_customer_details(

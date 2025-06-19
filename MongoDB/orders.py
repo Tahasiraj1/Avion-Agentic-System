@@ -17,3 +17,9 @@ class Order(DB):
     async def get_order_by_order_id(self, order_id):
         order = self.collection.find_one({'_id': ObjectId(order_id)})
         return order
+    
+    async def update_price(self, order_id, price):
+        self.collection.update_one(
+            {'_id': ObjectId(order_id)}, 
+            {'$set': {'totalAmount': price}}
+        )
